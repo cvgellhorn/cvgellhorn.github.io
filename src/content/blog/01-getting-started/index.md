@@ -40,7 +40,6 @@ To change the website metadata, edit `src/consts.ts`.
 export const SITE: Site = {
   NAME: "Astro Micro",
   DESCRIPTION: "Astro Micro is an accessible theme for Astro.",
-  EMAIL: "trevortylerlee@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
@@ -50,7 +49,6 @@ export const SITE: Site = {
 | :----------- | :-- | :--------------------------------------------------- |
 | TITLE        | Yes | Displayed in header and footer. Used in SEO and RSS. |
 | DESCRIPTION  | Yes | Used in SEO and RSS.                                 |
-| EMAIL        | Yes | Displayed in contact section.                        |
 | NUM_POSTS    | Yes | Limit number of posts on home page.                  |
 | NUM_PROJECTS | Yes | Limit number of projects on home page.               |
 
@@ -135,7 +133,7 @@ export default defineConfig({
 
 ## Set up Giscus
 
-Follow the steps at [giscus.app](https://giscus.app). Once you get your  custom Giscus script from that site, go to `Giscus.astro` and replace that script with your own.
+Follow the steps at [giscus.app](https://giscus.app). Once you get your custom Giscus script from that site, go to `Giscus.astro` and replace that script with your own.
 
 ```js
 // src/components/Giscus.astro
@@ -156,8 +154,8 @@ Follow the steps at [giscus.app](https://giscus.app). Once you get your  custom 
   data-lang="en"
   data-loading="lazy"
   crossorigin="anonymous"
-  async></script>
-
+  async
+></script>
 ```
 
 To change the Giscus themes used, edit the `setGiscusTheme` function in `Head.astro`.
