@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@iconify-json/fa-brands": "^1.1.9",
+    "@iconify-json/tabler": "^1.1.120",
     "@tailwindcss/typography": "^0.5.14",
     "pagefind": "^1.1.0",
     "prettier": "^3.3.3",
