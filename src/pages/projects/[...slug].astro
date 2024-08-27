@@ -1,5 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
@@ -39,15 +41,21 @@ const { Content } = await project.render();
       {
         (project.data.demoURL || project.data.repoURL) && (
           <nav class="flex gap-1">
+            {project.data.repoURL && (
+              <a
+                href={project.data.repoURL}
+                target="_blank"
+                class="-ml-1 inline-block rounded p-1 hover:bg-black/5 dark:hover:bg-white/5"
+              >
+                <Icon name="fa-brands:github" class="h-4 w-4" />
+              </a>
+            )}
+            {project.data.repoURL && project.data.demoURL && (
+              <span class="mr-1 inline-block">/</span>
+            )}
             {project.data.demoURL && (
               <Link href={project.data.demoURL} external>
                 demo
-              </Link>
-            )}
-            {project.data.demoURL && project.data.repoURL && <span>/</span>}
-            {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
-                repo
               </Link>
             )}
           </nav>

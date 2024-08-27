@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
 ---
@@ -7,6 +8,29 @@ import { SITE } from "@consts";
   <Container>
     <div class="flex items-center justify-between">
       <div>&copy; {new Date().getFullYear()} • {SITE.TITLE}</div>
+      <div class="flex flex-wrap items-center">
+        <a
+          href="https://www.linkedin.com/in/cvgellhorn/"
+          target="_blank"
+          class="inline-block rounded p-2 hover:bg-black/5 dark:hover:bg-white/5"
+        >
+          <Icon name="fa-brands:linkedin" class="h-5 w-5" />
+        </a>
+        <a
+          href="https://twitter.com/cvgellhorn"
+          target="_blank"
+          class="mx-2 inline-block rounded p-2 hover:bg-black/5 dark:hover:bg-white/5"
+        >
+          <Icon name="fa-brands:twitter" class="h-5 w-5" />
+        </a>
+        <a
+          href="https://github.com/cvgellhorn"
+          target="_blank"
+          class="inline-block rounded p-2 hover:bg-black/5 dark:hover:bg-white/5"
+        >
+          <Icon name="fa-brands:github" class="h-5 w-5" />
+        </a>
+      </div>
     </div>
   </Container>
 </footer>

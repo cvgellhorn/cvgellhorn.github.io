@@ -40,6 +40,10 @@ article {
   @apply prose-headings:text-black prose-headings:dark:text-white;
 }
 
+img {
+  @apply rounded-lg;
+}
+
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[1px];
