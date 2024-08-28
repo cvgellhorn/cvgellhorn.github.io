@@ -20,14 +20,14 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-neutral-100 dark:bg-neutral-900;
-  @apply text-black/75 dark:text-white/75;
+  @apply dark:bg-tokyo-dark bg-neutral-100;
+  @apply dark:text-tokyo-font text-black/75;
 }
 
 header {
   @apply fixed left-0 right-0 top-0 z-50 py-5;
-  @apply bg-neutral-100/75 dark:bg-neutral-900/75;
-  @apply saturate-200 backdrop-blur-sm;
+  @apply dark:bg-tokyo-dark/80 bg-neutral-100/75;
+  @apply backdrop-blur-sm;
 }
 
 footer {
@@ -45,8 +45,11 @@ img {
 }
 
 @layer utilities {
+  article {
+    @apply dark:text-tokyo-font;
+  }
   article a {
-    @apply font-sans text-current underline underline-offset-[1px];
+    @apply dark:text-tokyo-turquoise font-sans text-current underline underline-offset-[1px];
     @apply decoration-black/30 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
@@ -92,17 +95,23 @@ pre {
   --astro-code-token-link: #8d85ff;
 }
 
+/* dark: "#16161e",
+lighter: "#1a1b26",
+green: "#9ece6a",
+turquoise: "#7dcfff",
+font: "#a8b1d6", */
+
 .dark {
-  --astro-code-color-text: #fafafa;
-  --astro-code-color-background: #09090b;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #6eafad;
-  --astro-code-token-constant: #b3cceb;
-  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-color-text: #a8b1d6;
+  --astro-code-color-background: #1a1b26;
+  --astro-code-token-comment: #51597d;
+  --astro-code-token-keyword: #89ddff;
+  --astro-code-token-string: #9ece6a;
+  --astro-code-token-function: #7aa2f7;
+  --astro-code-token-constant: #9d7cd8;
+  --astro-code-token-parameter: #dcad67;
+  --astro-code-token-punctuation: #f7768e;
   --astro-code-token-string-expression: #bf7db6;
-  --astro-code-token-punctuation: #8996a3;
   --astro-code-token-link: #8d85ff;
 }
 

@@ -9,6 +9,15 @@ export default {
         sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],
         mono: ["Geist Mono", ...defaultTheme.fontFamily.mono],
       },
+      colors: {
+        tokyo: {
+          dark: "#16161e",
+          lighter: "#1a1b26",
+          green: "#9ece6a",
+          turquoise: "#7dcfff",
+          font: "#a8b1d6",
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
