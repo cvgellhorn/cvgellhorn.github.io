@@ -11,9 +11,9 @@ export default defineConfig({
   output: "static",
   site: "https://cvgellhorn.com.au",
   integrations: [tailwind(), icon(), sitemap(), mdx(), pagefind()],
-  // build: {
-  //   format: 'file'
-  // },
+  build: {
+    format: "file",
+  },
   markdown: {
     shikiConfig: {
       theme: "css-variables",
