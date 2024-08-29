@@ -8,8 +8,12 @@ import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-micro.vercel.app",
+  output: "static",
+  site: "https://cvgellhorn.com.au",
   integrations: [tailwind(), icon(), sitemap(), mdx(), pagefind()],
+  // build: {
+  //   format: 'file'
+  // },
   markdown: {
     shikiConfig: {
       theme: "css-variables",
