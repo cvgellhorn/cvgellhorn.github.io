@@ -1,5 +1,4 @@
 ---
-import type { Heading } from "./TableOfContents.astro";
 import Link from "./Link.astro";
 
 // https://kld.dev/building-table-of-contents/
@@ -14,7 +13,7 @@ const { heading } = Astro.props;
   {
     heading.subheadings.length > 0 && (
       <ul class="translate-x-3">
-        {heading.subheadings.map((subheading: Heading) => (
+        {heading.subheadings.map((subheading) => (
           <Astro.self heading={subheading} />
         ))}
       </ul>
