@@ -2,11 +2,11 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
-import Link from "@components/Link.astro";
+import { readingTime } from "../../lib/utils";
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Link from "../../components/Link.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
