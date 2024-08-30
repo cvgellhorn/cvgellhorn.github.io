@@ -24,6 +24,5 @@ DONE
 - rewrite README
 - change photos for markdown syntax post
 - rewrite intro blurb
-- refactor pagefind js
 - create changelog post
 - recolor light mode
