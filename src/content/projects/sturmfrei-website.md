@@ -8,6 +8,6 @@ repoURL: "https://github.com/sturmfreico/sturmfreico.github.io"
 
 ![Sturmfrei Website](/projects/sturmfrei-compressed.jpeg)
 
-We recently launched our company website [sturmfrei.com.au](https://sturmfrei.com.au/). The website is built using [Astro](https://astro.build/) and the [AstroWind](https://github.com/onwidget/astrowind) theme.
+We recently launched our company website [sturmfrei.com.au](https://sturmfrei.com.au/). The website was built using [Astro](https://astro.build/) and the [AstroWind](https://github.com/onwidget/astrowind) theme.
 
 Certain styles have been updated and changed to better fit our vision and requirements.
