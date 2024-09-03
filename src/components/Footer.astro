@@ -1,35 +1,26 @@
 ---
 import { Icon } from "astro-icon/components";
+
+import { SITE, SOCIALS } from "../consts";
 import Container from "./Container.astro";
-import { SITE } from "../consts";
 ---
 
 <footer class="animate">
   <Container>
     <div class="flex items-center justify-between">
       <div>&copy; {new Date().getFullYear()} • {SITE.TITLE}</div>
-      <div class="flex flex-wrap items-center">
-        <a
-          href="https://www.linkedin.com/in/cvgellhorn/"
-          target="_blank"
-          class="inline-block rounded p-2 hover:bg-black/5 hover:text-black dark:hover:bg-white/5 dark:hover:text-white"
-        >
-          <Icon name="fa-brands:linkedin" class="h-5 w-5" />
-        </a>
-        <a
-          href="https://x.com/cvgellhorn"
-          target="_blank"
-          class="mx-2 inline-block rounded p-2 hover:bg-black/5 hover:text-black dark:hover:bg-white/5 dark:hover:text-white"
-        >
-          <Icon name="tabler:brand-x" class="h-5 w-5" />
-        </a>
-        <a
-          href="https://github.com/cvgellhorn"
-          target="_blank"
-          class="inline-block rounded p-2 hover:bg-black/5 hover:text-black dark:hover:bg-white/5 dark:hover:text-white"
-        >
-          <Icon name="fa-brands:github" class="h-5 w-5" />
-        </a>
+      <div class="flex flex-wrap items-center gap-2">
+        {
+          SOCIALS.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              class="inline-block rounded p-2 hover:bg-black/5 hover:text-black dark:hover:bg-white/5 dark:hover:text-white"
+            >
+              <Icon name={social.icon} class="h-5 w-5" />
+            </a>
+          ))
+        }
       </div>
     </div>
   </Container>

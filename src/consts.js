@@ -12,26 +12,26 @@ export const HOME = {
 
 export const BLOG = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  DESCRIPTION: "A collection of articles on topics I am passionate about",
 };
 
 export const PROJECTS = {
   TITLE: "Projects",
   DESCRIPTION:
-    "A collection of my projects with links to repositories and live demos.",
+    "A collection of my projects with links to repositories and live demos",
 };
 
 export const SOCIALS = [
   {
-    NAME: "X (Twitter)",
-    HREF: "https://twitter.com/cvgellhorn",
+    url: "https://x.com/cvgellhorn",
+    icon: "tabler:brand-x",
   },
   {
-    NAME: "GitHub",
-    HREF: "https://github.com/cvgellhorn",
+    url: "https://www.linkedin.com/in/cvgellhorn",
+    icon: "fa-brands:linkedin",
   },
   {
-    NAME: "LinkedIn",
-    HREF: "https://www.linkedin.com/in/cvgellhorn",
+    url: "https://github.com/cvgellhorn",
+    icon: "fa-brands:github",
   },
 ];
