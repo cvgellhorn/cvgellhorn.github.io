@@ -34,4 +34,8 @@ export const SOCIALS = [
     url: "https://github.com/cvgellhorn",
     icon: "fa-brands:github",
   },
+  {
+    url: "/rss.xml",
+    icon: "tabler:rss",
+  },
 ];
