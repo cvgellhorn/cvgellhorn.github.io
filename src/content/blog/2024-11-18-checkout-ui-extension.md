@@ -71,7 +71,7 @@ const host = new URL(process.env.SHOPIFY_APP_URL || 'http://localhost')
 
 // Add SHOPIFY_APP_URL to extension
 if (process.env.NODE_ENV === 'development') {
-  const writeExtensionAppUrl = require('./utils/extension-app-url');
+  const writeExtensionAppUrl = require('./utils/extension-app-url').default;
   writeExtensionAppUrl(process.env.SHOPIFY_APP_URL);
 }
 [...]
