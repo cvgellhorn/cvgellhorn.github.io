@@ -5,7 +5,7 @@ date: "2024-09-15"
 demoURL: "https://rpid.dev/"
 ---
 
-![rpid.dev Website](/projects/rpid-screen.jpeg)
+![rpid.dev Website](/images/projects/rpid-screen.jpeg)
 
 I'm happy to announce that I launched [rpid.dev](https://rpid.dev/) today.
 This will be an ongoing project where I'll be adding resources and tools that I use for rapid development.

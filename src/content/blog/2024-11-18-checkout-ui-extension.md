@@ -4,6 +4,8 @@ description: "How to Dynamically Update the App URL in Shopify Checkout UI Exten
 date: "2024-11-18"
 ---
 
+![Shopify Checkout UI Extension](/images/blog/dynamic-app-url-extension.webp)
+
 When I began working on our custom Shopify app with a checkout UI extension, I encountered a recurring issue during development. Every time the development server restarted, the dynamically assigned Cloudflare tunnel URL provided by Shopify changed.
 
 This behaviour is expected and the default. Shopify conveniently exposes this dynamic URL through an environment variable for the app. However, this convenience doesn’t extend to extensions, as Shopify handles them differently. Extensions require the URL to be loaded from a statically defined location.
