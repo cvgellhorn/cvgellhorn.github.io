@@ -90,4 +90,4 @@ One drawback of this approach is the modification of the target file during deve
 
 This solution eliminates the need for manual URL updates during development while maintaining flexibility. By programmatically managing the dynamic app URL, you can streamline the development process for your Shopify checkout UI extensions.
 
-I hope this helps anyone facing similar challenges in their development workflow. If you have questions or improvements, feel free to share them!
+I hope this helps anyone facing similar challenges. If you have questions or improvement ideas, feel free to reach out via [Twitter / X](https://x.com/cvgellhorn)!
