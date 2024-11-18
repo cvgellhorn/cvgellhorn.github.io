@@ -41,19 +41,17 @@ import fs from "node:fs/promises";
 
 const TARGET_FILE_PATH = "../extensions/your-ext/src/utils/base-url.js";
 
-const writeExtensionAppUrl = async () => {
-  // Add localhost if SHOPIFY_APP_URL is not set, Shopify defined fallback
-  const baseUrl = process.env.SHOPIFY_APP_URL || "http://localhost";
+const writeExtensionAppUrl = async (appUrl = "http://localhost") => {
   const filePath = path.join(__dirname, TARGET_FILE_PATH);
 
   try {
-    await fs.writeFile(filePath, `export const APP_BASE_URL = '${baseUrl}';\n`);
+    await fs.writeFile(filePath, `export const APP_BASE_URL = '${appUrl}';\n`);
   } catch (err) {
     console.log("Error adding baseUrl to extensions:", err);
   }
 };
 
-writeExtensionAppUrl();
+export default writeExtensionAppUrl;
 ```
 
 ### Key Steps:
@@ -73,7 +71,8 @@ const host = new URL(process.env.SHOPIFY_APP_URL || 'http://localhost')
 
 // Add SHOPIFY_APP_URL to extension
 if (process.env.NODE_ENV === 'development') {
-  require('./utils/extension-app-url');
+  const writeExtensionAppUrl = require('./utils/extension-app-url');
+  writeExtensionAppUrl(process.env.SHOPIFY_APP_URL);
 }
 [...]
 ```
