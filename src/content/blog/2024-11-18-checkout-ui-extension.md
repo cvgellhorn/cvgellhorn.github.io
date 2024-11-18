@@ -27,12 +27,12 @@ Following the approach [described in this post](https://liquidonate.com/blog/sho
 
 ## My Solution
 
-After examining Shopify’s handling of the process.env.SHOPIFY_APP_URL environment variable, I devised a workaround by customising `vite.config.js`. My approach involves a small script that reads the dynamic URL from the environment variable and writes it to a constant in a specific file. This file's sole purpose is to export the URL for the extension.
+After examining Shopify’s handling of the `process.env.SHOPIFY_APP_URL` environment variable, I devised a workaround by customising `vite.config.js`. My approach involves a small script that reads the dynamic URL from the environment variable and writes it to a constant in a specific file. This file's sole purpose is to export the URL for the extension.
 
 Here’s the script, located in the `utils` directory:
 
 ```js
-// utils/extension-app-url.js
+/** utils/extension-app-url.js */
 
 import path from "node:path";
 import fs from "node:fs/promises";
@@ -56,11 +56,11 @@ writeExtensionAppUrl();
 
 ### Key Steps:
 
-**1**. **Define the Target File Path**
+**1. Define the Target File Path**
 
 The `TARGET_FILE_PATH` points to the file where the dynamic app URL will be stored. This file will export the `APP_BASE_URL` constant for the extension.
 
-**2.** **Integrate with** `vite.config.js`
+**2. Integrate with vite**
 
 Modify `vite.config.js` to dynamically import and execute the script after initialising the host variable. At this point, the `process.env.SHOPIFY_APP_URL` value is available.
 
@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
 [...]
 ```
 
-This script only runs in development mode (`npm run dev`), ensuring the production environment remains unaffected.
+This script only runs in development mode, ensuring the production environment remains unaffected.
 
 ## Handling Unwanted File Changes
 
