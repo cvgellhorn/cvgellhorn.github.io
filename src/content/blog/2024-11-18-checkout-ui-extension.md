@@ -24,7 +24,6 @@ Following the approach [described in this post](https://liquidonate.com/blog/sho
 
 - Every time the development server restarts, the app must be opened in the Shopify admin to update the URL in the shop metafields.
 - This extra step is cumbersome during development and unreliable for production, as it assumes merchants will open the app to trigger updates.
-  ⠀
 
 ## My Solution
 
@@ -57,9 +56,13 @@ writeExtensionAppUrl();
 
 ### Key Steps:
 
-**1**. **Define the Target File Path**:The `TARGET_FILE_PATH` points to the file where the dynamic app URL will be stored. This file will export the `APP_BASE_URL` constant for the extension.
+**1**. **Define the Target File Path**
 
-**2.** **Integrate with** `vite.config.js`:Modify `vite.config.js` to dynamically import and execute the script after initialising the host variable. At this point, the `process.env.SHOPIFY_APP_URL` value is available.
+The `TARGET_FILE_PATH` points to the file where the dynamic app URL will be stored. This file will export the `APP_BASE_URL` constant for the extension.
+
+**2.** **Integrate with** `vite.config.js`
+
+Modify `vite.config.js` to dynamically import and execute the script after initialising the host variable. At this point, the `process.env.SHOPIFY_APP_URL` value is available.
 
 ```js
 [...]
