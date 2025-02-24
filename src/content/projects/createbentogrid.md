@@ -7,7 +7,7 @@ demoURL: "https://createbentogrid.com/"
 
 ## Crafting a Free Bento Grid Tool with AI Magic
 
-Ever stared at a blank screen, trying to whip up a slick product marketing image, only to realize your design skills are stuck in the early 2000s? Yeah, me too. That’s why I decided to build a free online tool to create custom bento grid product marketing images—those tidy, visually tasty layouts that make your products pop. And here’s the kicker: I leaned hard on AI, specifically Cursor, to make it happen.
+Ever stared at a blank screen, trying to whip up a slick product marketing image, only to realize your design skills are stuck in the early 2000s? Yeah, me too. That’s why I decided to build a [free online tool](https://createbentogrid.com/) to create custom bento grid product marketing images—those tidy, visually tasty layouts that make your products pop. And here’s the kicker: I leaned hard on AI, specifically Cursor, to make it happen.
 
 ## What are bento grids?
 
