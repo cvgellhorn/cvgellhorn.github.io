@@ -1,5 +1,5 @@
 ---
-title: "createbentogrid"
+title: "createbentogrid.com"
 description: "Business ideas to die for"
 date: "2025-02-24"
 demoURL: "https://createbentogrid.com/"
@@ -16,5 +16,6 @@ Bento grids are all the rage for a reason. They’re clean, modular, and let you
 Now, the tool’s live and free for anyone to use. Upload your product shots, tweak the layout, and download a bento grid that’s ready to dazzle customers. No design degree required.
 
 Try it out, and let me know if your marketing images start getting more likes than your vacation pics.
+
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-This text was also generated with AI, welcome to the furure!
+This text was also generated with AI, welcome to the future!
