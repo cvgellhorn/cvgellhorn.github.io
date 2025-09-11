@@ -1,5 +1,5 @@
 ---
-title: "shiddy.biz"
+title: "shiddy.biz (retired)"
 description: "Business ideas to die for"
 date: "2025-02-10"
 demoURL: "https://shiddy.biz/"
