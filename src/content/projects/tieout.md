@@ -1,6 +1,7 @@
 ---
 title: "Introducing Tieout"
 description: "A new tool to verify AI-generated reports against original data sources"
+demoURL: “https://tieout.ai“
 date: "2026-02-23"
 ---
 
