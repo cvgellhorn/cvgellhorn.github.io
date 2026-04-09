@@ -50,7 +50,9 @@ footer {
   @apply py-6 text-sm;
 }
 
-article {
+/* Scoped wrapper: @apply prose on bare `article` in v4 targets every <article>, which
+   overwrote homepage copy with prose body gray. Only long-form pages use this class. */
+.markdown-content {
   @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-auto max-w-full;
   @apply prose-headings:font-semibold;
   @apply prose-headings:text-black prose-headings:dark:text-white;
@@ -61,15 +63,15 @@ img {
 }
 
 @layer utilities {
-  article {
+  .markdown-content {
     @apply dark:text-tokyo-font;
   }
-  article a {
+  .markdown-content a {
     @apply dark:text-tokyo-turquoise font-sans text-current underline underline-offset-[1px];
     @apply decoration-black/30 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
-  article a:hover {
+  .markdown-content a:hover {
     @apply text-black dark:text-white;
     @apply decoration-black/50 dark:decoration-white/50;
   }
