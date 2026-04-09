@@ -1,0 +1,368 @@
+---
+import { DEMO } from "../consts";
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+---
+
+<Layout title={DEMO.TITLE} description={DEMO.DESCRIPTION}>
+  <Container>
+    <div class="mx-auto max-w-4xl space-y-6">
+      <div class="animate space-y-2">
+        <h1 class="text-2xl font-semibold text-black dark:text-white">
+          Visual site tour
+        </h1>
+        <p class="text-black/75 dark:text-tokyo-font">
+          {DEMO.DESCRIPTION} Use the controls to play, pause, or restart. The preview
+          below is a real embedded view of this site (same origin), with a guided
+          pointer and automatic navigation—similar to a short screen recording, but
+          running live in your browser.
+        </p>
+      </div>
+
+      <div
+        id="demo-reduced-notice"
+        class="hidden rounded-lg border border-black/15 bg-neutral-100/80 px-4 py-3 text-sm text-black/80 dark:border-white/20 dark:bg-tokyo-lighter/80 dark:text-tokyo-font"
+        role="status"
+      >
+        Motion is reduced on your system, so autoplay is off. Press
+        <strong class="font-medium text-black dark:text-white">Play</strong> to start
+        the tour manually.
+      </div>
+
+      <div
+        class="animate overflow-hidden rounded-xl border border-black/15 bg-neutral-200/60 shadow-lg dark:border-white/15 dark:bg-tokyo-lighter/40"
+      >
+        <div
+          class="flex items-center gap-2 border-b border-black/10 px-3 py-2 dark:border-white/10"
+        >
+          <span
+            class="inline-block size-3 rounded-full bg-red-400/90"
+            aria-hidden="true"></span>
+          <span
+            class="inline-block size-3 rounded-full bg-amber-400/90"
+            aria-hidden="true"></span>
+          <span
+            class="inline-block size-3 rounded-full bg-emerald-400/90"
+            aria-hidden="true"></span>
+          <span
+            class="ml-2 flex-1 truncate rounded-md bg-white/80 px-3 py-1 font-mono text-xs text-black/60 dark:bg-tokyo-dark/80 dark:text-tokyo-font/80"
+            id="demo-url-bar"
+            aria-live="polite">/</span
+          >
+        </div>
+
+        <div class="relative bg-neutral-100 dark:bg-tokyo-dark">
+          <iframe
+            id="demo-frame"
+            class="block h-[min(70vh,560px)] w-full border-0 bg-neutral-100 dark:bg-tokyo-dark"
+            title="Site preview for demo tour"
+            loading="lazy"></iframe>
+          <div
+            class="pointer-events-none absolute inset-0"
+            id="demo-overlay"
+            aria-hidden="true"
+          >
+            <div
+              class="pointer-events-none absolute size-5 rounded-full border-2 border-tokyo-turquoise bg-tokyo-turquoise/25 opacity-0 shadow-[0_0_0_4px_rgba(125,207,255,0.15)] transition-[opacity,transform] duration-500 ease-out"
+              id="demo-cursor"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="animate flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
+      >
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            id="demo-play"
+            class="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-100 dark:border-white/20 dark:bg-tokyo-lighter dark:text-white dark:hover:bg-tokyo-lighter/80"
+          >
+            Play
+          </button>
+          <button
+            type="button"
+            id="demo-pause"
+            class="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-100 dark:border-white/20 dark:bg-tokyo-lighter dark:text-white dark:hover:bg-tokyo-lighter/80"
+          >
+            Pause
+          </button>
+          <button
+            type="button"
+            id="demo-restart"
+            class="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-100 dark:border-white/20 dark:bg-tokyo-lighter dark:text-white dark:hover:bg-tokyo-lighter/80"
+          >
+            Restart
+          </button>
+          <label
+            class="ml-1 flex items-center gap-2 text-sm text-black/75 dark:text-tokyo-font"
+          >
+            <input
+              id="demo-loop"
+              type="checkbox"
+              class="rounded border-black/20 dark:border-white/30"
+              checked
+            />
+            Loop
+          </label>
+        </div>
+        <div class="flex min-w-[200px] flex-1 flex-col gap-1 sm:max-w-xs">
+          <div
+            class="flex justify-between text-xs text-black/50 dark:text-tokyo-font/70"
+          >
+            <span>Progress</span>
+            <span id="demo-step-label">—</span>
+          </div>
+          <div
+            class="h-2 overflow-hidden rounded-full bg-black/10 dark:bg-white/10"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="demo-progress"
+          >
+            <div
+              class="h-full w-0 rounded-full bg-tokyo-turquoise transition-[width] duration-300 ease-out"
+              id="demo-progress-fill"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Layout>
+
+<script is:inline>
+  const steps = [
+    {
+      label: "Home",
+      path: "/",
+      dwell: 4800,
+      scrollY: 0,
+      target: "h1",
+    },
+    {
+      label: "Blog",
+      path: "/blog",
+      dwell: 5500,
+      scrollY: 120,
+      target: "ul.not-prose a",
+    },
+    {
+      label: "Projects",
+      path: "/projects",
+      dwell: 5500,
+      scrollY: 120,
+      target: "ul.not-prose a",
+    },
+    {
+      label: "Back home",
+      path: "/",
+      dwell: 4200,
+      scrollY: 0,
+      target: "a[href='/blog']",
+    },
+  ];
+
+  const iframe = document.getElementById("demo-frame");
+  const cursor = document.getElementById("demo-cursor");
+  const urlBar = document.getElementById("demo-url-bar");
+  const playBtn = document.getElementById("demo-play");
+  const pauseBtn = document.getElementById("demo-pause");
+  const restartBtn = document.getElementById("demo-restart");
+  const loopCheck = document.getElementById("demo-loop");
+  const stepLabel = document.getElementById("demo-step-label");
+  const progress = document.getElementById("demo-progress");
+  const progressFill = document.getElementById("demo-progress-fill");
+  const reducedNotice = document.getElementById("demo-reduced-notice");
+
+  if (
+    !iframe ||
+    !cursor ||
+    !urlBar ||
+    !playBtn ||
+    !pauseBtn ||
+    !restartBtn ||
+    !loopCheck ||
+    !stepLabel ||
+    !progress ||
+    !progressFill ||
+    !reducedNotice ||
+    !(iframe instanceof HTMLIFrameElement)
+  ) {
+    throw new Error("Demo UI elements missing");
+  }
+
+  let playing = false;
+  let stepIndex = 0;
+  let timeoutId = null;
+  let loadHandler = null;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  function setProgress(pct) {
+    const v = Math.max(0, Math.min(100, pct));
+    progressFill.style.width = `${v}%`;
+    progress.setAttribute("aria-valuenow", String(Math.round(v)));
+  }
+
+  function hideCursor() {
+    cursor.style.opacity = "0";
+    cursor.style.transform = "scale(0.6)";
+  }
+
+  function placeCursor(doc, selector) {
+    const el = doc.querySelector(selector);
+    if (!el || !(el instanceof HTMLElement)) {
+      hideCursor();
+      return;
+    }
+    const r = el.getBoundingClientRect();
+    const size = 20;
+    cursor.style.left = `${r.left + r.width / 2 - size / 2}px`;
+    cursor.style.top = `${r.top + r.height / 2 - size / 2}px`;
+    cursor.style.opacity = "1";
+    cursor.style.transform = "scale(1)";
+  }
+
+  function clearScheduled() {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+    if (loadHandler && iframe) {
+      iframe.removeEventListener("load", loadHandler);
+      loadHandler = null;
+    }
+  }
+
+  function navigateIframe(path, onLoad) {
+    iframe.addEventListener("load", onLoad, { once: true });
+    try {
+      const win = iframe.contentWindow;
+      if (win && win.location.pathname === path) {
+        const sep = path.includes("?") ? "&" : "?";
+        win.location.replace(`${path}${sep}__demo=${Date.now()}`);
+        return;
+      }
+    } catch {
+      /* iframe not ready yet */
+    }
+    iframe.src = path;
+  }
+
+  function finishTour() {
+    clearScheduled();
+    playing = false;
+    stepLabel.textContent = "Finished";
+    setProgress(100);
+    hideCursor();
+  }
+
+  function scheduleNext() {
+    if (!playing) return;
+
+    const atEnd = stepIndex >= steps.length;
+    if (atEnd) {
+      if (loopCheck.checked) {
+        stepIndex = 0;
+      } else {
+        finishTour();
+        return;
+      }
+    }
+
+    const step = steps[stepIndex];
+    const stepNum = stepIndex + 1;
+    setProgress(((stepNum - 1) / steps.length) * 100);
+    stepLabel.textContent = `${step.label} (${stepNum}/${steps.length})`;
+    urlBar.textContent = step.path;
+
+    loadHandler = () => {
+      try {
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        if (!doc || !win) return;
+
+        win.requestAnimationFrame(() => {
+          if (step.scrollY > 0) {
+            win.scrollTo({ top: step.scrollY, behavior: "smooth" });
+          } else {
+            win.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        });
+
+        const scrollDelay = step.scrollY > 0 ? 500 : 80;
+        window.setTimeout(() => {
+          try {
+            placeCursor(doc, step.target);
+          } catch {
+            hideCursor();
+          }
+        }, scrollDelay);
+      } catch {
+        hideCursor();
+      }
+
+      timeoutId = window.setTimeout(() => {
+        stepIndex += 1;
+        scheduleNext();
+      }, step.dwell);
+    };
+
+    navigateIframe(step.path, loadHandler);
+  }
+
+  function startTour(fromStep = 0) {
+    clearScheduled();
+    playing = true;
+    stepIndex = fromStep;
+    scheduleNext();
+  }
+
+  function pauseTour() {
+    playing = false;
+    clearScheduled();
+    stepLabel.textContent = "Paused";
+  }
+
+  playBtn.addEventListener("click", () => {
+    if (playing) return;
+    if (stepIndex >= steps.length && !loopCheck.checked) {
+      stepIndex = 0;
+    }
+    startTour(stepIndex);
+  });
+
+  pauseBtn.addEventListener("click", pauseTour);
+
+  restartBtn.addEventListener("click", () => {
+    pauseTour();
+    stepIndex = 0;
+    setProgress(0);
+    stepLabel.textContent = "—";
+    urlBar.textContent = "/";
+    startTour(0);
+  });
+
+  if (prefersReducedMotion) {
+    reducedNotice.classList.remove("hidden");
+    iframe.src = "/";
+    urlBar.textContent = "/";
+  } else {
+    iframe.src = "/";
+    urlBar.textContent = "/";
+    window.setTimeout(() => startTour(0), 900);
+  }
+</script>
+
+<style>
+  #demo-cursor {
+    will-change: transform, opacity;
+  }
+</style>

@@ -21,6 +21,12 @@ export const PROJECTS = {
     "A collection of my projects with links to repositories and live demos",
 };
 
+export const DEMO = {
+  TITLE: "Site tour",
+  DESCRIPTION:
+    "Automated in-browser preview that walks through the main pages of this site.",
+};
+
 export const SOCIALS = [
   {
     url: "https://x.com/cvgellhorn",
