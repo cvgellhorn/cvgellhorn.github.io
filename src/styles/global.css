@@ -1,6 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    "Geist Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  --color-tokyo-dark: #16161e;
+  --color-tokyo-lighter: #1a1b26;
+  --color-tokyo-green: #9ece6a;
+  --color-tokyo-turquoise: #7dcfff;
+  --color-tokyo-font: #a8b1d6;
+}
 
 html {
   overflow-y: auto;
@@ -20,13 +36,13 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-neutral-100 dark:bg-tokyo-dark;
-  @apply text-black/75 dark:text-tokyo-font;
+  @apply dark:bg-tokyo-dark bg-neutral-100;
+  @apply dark:text-tokyo-font text-black/75;
 }
 
 header {
-  @apply fixed left-0 right-0 top-0 z-50 py-4;
-  @apply bg-neutral-100/75 dark:bg-tokyo-dark/80;
+  @apply fixed top-0 right-0 left-0 z-50 py-4;
+  @apply dark:bg-tokyo-dark/80 bg-neutral-100/75;
   @apply backdrop-blur-sm;
 }
 
@@ -35,7 +51,7 @@ footer {
 }
 
 article {
-  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-auto max-w-full;
   @apply prose-headings:font-semibold;
   @apply prose-headings:text-black prose-headings:dark:text-white;
 }
@@ -49,7 +65,7 @@ img {
     @apply dark:text-tokyo-font;
   }
   article a {
-    @apply font-sans text-current underline underline-offset-[1px] dark:text-tokyo-turquoise;
+    @apply dark:text-tokyo-turquoise font-sans text-current underline underline-offset-[1px];
     @apply decoration-black/30 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
@@ -117,7 +133,7 @@ font: "#a8b1d6", */
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
+  @apply absolute top-3 right-3 grid size-9 place-content-center rounded border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
 }
 
 .copy-code:hover {
