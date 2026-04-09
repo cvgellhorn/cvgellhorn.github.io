@@ -10,7 +10,13 @@ export default defineConfig({
   output: "static",
   site: "https://cvgellhorn.com.au",
   image: {
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
   },
   integrations: [icon(), sitemap(), mdx()],
   vite: {
