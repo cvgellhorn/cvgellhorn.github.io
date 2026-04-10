@@ -6,7 +6,7 @@ This is a static Astro portfolio/blog site. No databases, backend services, or D
 
 ### Node version
 
-The project requires **Node.js v22.22.1** (specified in `.nvmrc`), matching Astro 6’s supported range. Use `nvm use` to activate it.
+The project uses **Node.js v24.14.1** (current Active LTS, specified in `.nvmrc`), which satisfies Astro 6's supported range. Use `nvm use` to activate it.
 
 ### Key commands
 
