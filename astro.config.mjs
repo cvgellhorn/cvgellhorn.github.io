@@ -1,4 +1,4 @@
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 import mdx from "@astrojs/mdx";
@@ -9,7 +9,19 @@ import icon from "astro-icon";
 export default defineConfig({
   output: "static",
   site: "https://cvgellhorn.com.au",
-  integrations: [tailwind(), icon(), sitemap(), mdx()],
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+  },
+  integrations: [icon(), sitemap(), mdx()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   build: {
     format: "file",
   },

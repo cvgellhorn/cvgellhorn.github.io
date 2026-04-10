@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 import "@fontsource/geist-sans";
 import "@fontsource/geist-mono";
@@ -44,9 +44,12 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ViewTransitions />
+<ClientRouter />
 
 <script is:inline>
+  let scrollListenerAttached = false;
+  let mediaQueryListenerAttached = false;
+
   function init() {
     preloadTheme();
     onScroll();
@@ -81,15 +84,21 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
       updateThemeButtons();
     });
 
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        if (localStorage.theme === "system") {
-          toggleTheme(event.matches);
-        }
-      });
+    if (!mediaQueryListenerAttached) {
+      mediaQueryListenerAttached = true;
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (event) => {
+          if (localStorage.theme === "system") {
+            toggleTheme(event.matches);
+          }
+        });
+    }
 
-    document.addEventListener("scroll", onScroll);
+    if (!scrollListenerAttached) {
+      scrollListenerAttached = true;
+      document.addEventListener("scroll", onScroll);
+    }
   }
 
   function updateThemeButtons() {
