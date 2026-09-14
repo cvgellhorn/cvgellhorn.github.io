@@ -81,7 +81,7 @@ const config = {
     location: 'Sydney, Australia',
     focus: 'Astro, Shopify apps, and rapid AI development',
     lead: 'Software Engineer from Germany, living in Sydney. Building products across startups since 2008.',
-    headline: ['Made to', 'ship.'],
+    headline: ['About'],
     statementLabel: 'Work',
     statementTitle: 'Notes on shipping useful software.',
     statement:
