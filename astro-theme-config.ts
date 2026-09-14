@@ -22,16 +22,13 @@ const config = {
     title: 'cvgellhorn',
     logoLabel: 'cvgellhorn',
     description:
-      'Christoph von Gellhorn — software engineer in Sydney. Notes on Astro, Shopify, and building with AI.',
+      'Christoph von Gellhorn — Software Engineer in Sydney. Notes on Astro, Shopify, and building with AI.',
     author: 'Christoph von Gellhorn',
     /** Optional absolute or root-relative image URL for homepage/search/about social previews. */
     defaultOgImage: '/og.png',
   },
 
-  nav: [
-    { label: 'Posts', href: '/posts' },
-    { label: 'About', href: '/about' },
-  ] as NavItem[],
+  nav: [] as NavItem[],
 
   footerNav: [
     { label: 'Posts', href: '/posts' },
@@ -80,10 +77,10 @@ const config = {
   about: {
     profileImage: '',
     name: 'Christoph von Gellhorn',
-    role: 'Software engineer. Node.js, React, and Ruby on Rails.',
+    role: 'Software Engineer. Node.js, React, and Ruby on Rails.',
     location: 'Sydney, Australia',
     focus: 'Astro, Shopify apps, and rapid AI development',
-    lead: 'Software engineer from Germany, living in Sydney. Building products across startups since 2008.',
+    lead: 'Software Engineer from Germany, living in Sydney. Building products across startups since 2008.',
     headline: ['Made to', 'ship.'],
     statementLabel: 'Work',
     statementTitle: 'Notes on shipping useful software.',
