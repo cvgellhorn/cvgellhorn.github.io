@@ -152,6 +152,8 @@
   margin-top: var(--space-20);
   padding-bottom: var(--space-16);
   border-bottom: 1px solid var(--separator);
+  display: flex;
+  flex-direction: column;
 }
 
 .featured-card {
@@ -164,6 +166,12 @@
   transition:
     transform var(--duration-normal) var(--ease-spring),
     opacity var(--duration-fast) var(--ease-out);
+}
+
+.featured-card + .featured-card {
+  margin-top: var(--space-16);
+  padding-top: var(--space-16);
+  border-top: 1px solid var(--separator);
 }
 
 .featured-card:hover {
