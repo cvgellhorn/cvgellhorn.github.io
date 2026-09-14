@@ -1,19 +1,25 @@
 ---
-import { SITE } from "../consts";
-import Layout from "../layouts/Layout.astro";
-import Container from "../components/Container.astro";
-import BackToPrevious from "../components/BackToPrevious.astro";
+import '../styles/pages/not-found.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
 ---
 
-<Layout title="404" description={SITE.DESCRIPTION}>
-  <Container>
-    <div class="mt-16 grid place-items-center gap-3">
-      <h4 class="animate text-2xl font-semibold text-black dark:text-white">
-        404: Page not found
-      </h4>
-      <span class="animate">
-        <BackToPrevious href="/">Go to home page</BackToPrevious>
-      </span>
+<BaseLayout
+  title="Page not found"
+  description="The page you requested does not exist."
+  robots="noindex, follow"
+  canonicalUrl={withBase('/404.html')}
+  pageUrl={withBase('/404.html')}
+>
+  <main class="not-found-main" id="main-content">
+    <div class="not-found-inner">
+      <p class="not-found-code">404</p>
+      <h1 class="not-found-title">Page not found</h1>
+      <p class="not-found-desc">The URL may be wrong, or the page may have been removed.</p>
+      <div class="not-found-actions">
+        <a href={withBase('/')} class="btn btn-primary">Home</a>
+        <a href={withBase('/posts')} class="btn btn-secondary">All posts</a>
+      </div>
     </div>
-  </Container>
-</Layout>
+  </main>
+</BaseLayout>
