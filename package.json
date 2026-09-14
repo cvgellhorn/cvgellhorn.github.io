@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "author": "Christoph von Gellhorn",
-  "homepage": "https://cvgellhorn.com.au",
+  "homepage": "https://cvgellhorn.com",
   "engines": {
     "node": ">=22.12.0"
   },

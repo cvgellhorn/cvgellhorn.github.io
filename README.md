@@ -1,6 +1,6 @@
 # cvgellhorn.com
 
-Personal site for [Christoph von Gellhorn](https://cvgellhorn.com.au), built with [Astro Tone](https://github.com/hanityx/astro-tone).
+Personal site for [Christoph von Gellhorn](https://cvgellhorn.com), built with [Astro Tone](https://github.com/hanityx/astro-tone).
 
 ## Development
 

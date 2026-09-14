@@ -27,7 +27,7 @@ jobs:
       - uses: actions/configure-pages@v6
       - name: Configure Astro site URL
         run: |
-          echo "ASTRO_SITE_URL=https://cvgellhorn.com.au" >> "$GITHUB_ENV"
+          echo "ASTRO_SITE_URL=https://cvgellhorn.com" >> "$GITHUB_ENV"
           echo "ASTRO_SITE_BASE=" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build

@@ -13,7 +13,7 @@ type NavItem = {
 const config = {
   site: {
     /** Production origin, used for canonical links, sitemap, and Open Graph metadata. */
-    url: 'https://cvgellhorn.com.au',
+    url: 'https://cvgellhorn.com',
     /** Subpath such as '/repo-name'. Keep empty when deploying at a domain root. */
     base: '',
     lang: 'en',
@@ -70,7 +70,7 @@ const config = {
   },
 
   social: {
-    website: 'https://cvgellhorn.com.au',
+    website: 'https://cvgellhorn.com',
     email: '',
     linkedin: 'https://www.linkedin.com/in/cvgellhorn',
     github: 'https://github.com/cvgellhorn',
