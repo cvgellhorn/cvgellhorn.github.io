@@ -184,7 +184,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 0 var(--space-4);
+  min-height: var(--featured-thumb-size);
+  padding: 0;
 }
 
 .featured-meta {
@@ -389,6 +390,10 @@
 
   .featured-card {
     grid-template-columns: 1fr;
+  }
+
+  .featured-text {
+    min-height: 0;
   }
 
   .featured-thumb-wrap {
