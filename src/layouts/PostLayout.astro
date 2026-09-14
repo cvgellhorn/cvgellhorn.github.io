@@ -1,6 +1,7 @@
 ---
 import 'toc-rail/style.css';
 import '../styles/layouts/post.css';
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import Comments from '../components/Comments.astro';
 import FeaturedPostGrid from '../components/FeaturedPostGrid.astro';
@@ -33,6 +34,8 @@ const {
 
 const tr = getUiText();
 const postsBase = withBase('/posts');
+const heroImageWidths = [640, 960, 1280, 1600];
+const heroImageSizes = '(max-width: 600px) calc(100vw - 32px), 784px';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pubDateISO = pubDate.toISOString();
@@ -115,6 +118,32 @@ const jsonLd = serializeScriptJson({
       </header>
 
       <div class="post-divider"></div>
+
+      {heroImage && (
+        <figure class="post-hero">
+          {demoURL ? (
+            <a href={demoURL} target="_blank" rel="noopener">
+              <Image
+                src={heroImage}
+                alt={title}
+                class="post-hero-img"
+                widths={heroImageWidths}
+                sizes={heroImageSizes}
+                quality={88}
+              />
+            </a>
+          ) : (
+            <Image
+              src={heroImage}
+              alt={title}
+              class="post-hero-img"
+              widths={heroImageWidths}
+              sizes={heroImageSizes}
+              quality={88}
+            />
+          )}
+        </figure>
+      )}
 
       <div class="prose" id="prose-content">
         <slot />

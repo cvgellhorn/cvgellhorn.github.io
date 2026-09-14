@@ -38,7 +38,7 @@ export function mountImageLightbox() {
     closeBtn.focus({ preventScroll: true });
   };
 
-  document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+  document.querySelectorAll<HTMLImageElement>('.prose img, .post-hero-img').forEach((img) => {
     if (img.closest('a') || img.dataset.lightboxBound === 'true') return;
     img.dataset.lightboxBound = 'true';
     img.classList.add('is-zoomable');

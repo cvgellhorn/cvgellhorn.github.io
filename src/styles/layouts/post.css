@@ -9,6 +9,7 @@
 .back-link,
 .post-header,
 .post-divider,
+.post-hero,
 .prose {
   max-width: var(--max-width-content);
 }
@@ -93,6 +94,29 @@
   gap: var(--space-2);
   margin: var(--space-4) 0 0;
   font-size: var(--text-footnote);
+}
+
+.post-hero {
+  margin: 0 0 var(--space-10);
+}
+
+.post-hero a {
+  display: block;
+}
+
+.post-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--separator);
+  background:
+    radial-gradient(
+      circle at 24% 24%,
+      color-mix(in srgb, var(--label-primary) 6%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(135deg, var(--fill-secondary), var(--fill-tertiary));
 }
 
 .post-links a {
