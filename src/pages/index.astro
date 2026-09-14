@@ -1,100 +1,159 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import '../styles/pages/home.css';
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import FeaturedPostGrid from '../components/FeaturedPostGrid.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { DATE_LOCALE, SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getUiText } from '../ui';
+import { withBase } from '../utils/paths';
+const tr = getUiText();
 
-import { SITE, HOME } from "../consts";
-import Layout from "../layouts/Layout.astro";
-import Container from "../components/Container.astro";
-import ArrowCard from "../components/ArrowCard.astro";
-import Link from "../components/Link.astro";
+const posts = (await getCollection('posts'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const experience = new Date().getFullYear() - 2008;
+const featured = posts.find((post) => post.data.homeFeatured) ?? posts[0];
+const heroCandidates = posts.filter((post) => post.id !== featured?.id);
+const pinnedHeroPosts = posts
+  .filter((post) => post.id !== featured?.id && post.data.homeHeroOrder)
+  .sort((a, b) => {
+    const orderDelta = (a.data.homeHeroOrder ?? 0) - (b.data.homeHeroOrder ?? 0);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+const fallbackHeroPosts = heroCandidates.filter((post) => !post.data.homeHeroOrder);
+const heroPosts = [...pinnedHeroPosts, ...fallbackHeroPosts].slice(0, 2);
+const heroDateFormatter = new Intl.DateTimeFormat(DATE_LOCALE, {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+const getHeroDateParts = (date: Date) => {
+  const parts = heroDateFormatter.formatToParts(date);
+  return {
+    label: heroDateFormatter.format(date),
+    parts,
+  };
+};
+const gridCandidates = posts.filter((post) => post.id !== featured?.id);
+const pinnedGridPosts = gridCandidates
+  .filter((post) => post.data.homeOrder)
+  .sort((a, b) => {
+    const orderDelta = (a.data.homeOrder ?? 0) - (b.data.homeOrder ?? 0);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+const fallbackGridPosts = gridCandidates.filter((post) => !post.data.homeOrder);
+const gridPosts = [...pinnedGridPosts, ...fallbackGridPosts].slice(0, 3);
+const featuredPlaceholder = featured?.data.heroImage
+  ? await getImage({
+      src: featured.data.heroImage,
+      width: 48,
+      format: 'webp',
+      quality: 28,
+    })
+  : undefined;
+const featuredPlaceholderStyle = featuredPlaceholder
+  ? `--tone-image-placeholder: url("${featuredPlaceholder.src}");`
+  : undefined;
 ---
 
-<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <aside>
-      <h1 class="animate mb-6 font-semibold text-black dark:text-white">
-        Christoph von Gellhorn
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main id="main-content" class="home-main">
+    <section class="hero">
+      <h1 class="hero-title">
+        <span class="hero-title-line">{tr.heroTitle}</span>
+        {
+          tr.heroTitleLine2 && (
+            <span class="hero-title-line hero-title-line--accent">{tr.heroTitleLine2}</span>
+          )
+        }
       </h1>
-      <Image
-        src="https://images.unsplash.com/photo-1484788984921-03950022c9ef?q=80&w=3032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Photo by Alex Knight on Unsplash"
-        class="mb-6 w-full max-w-full"
-        width={1200}
-        height={745}
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
-      <div class="space-y-16">
-        <section>
-          <div class="space-y-4">
-            <p class="animate">
-              I'm a Software Engineer from Germany living in Sydney, Australia.
-              I worked in different startups across the globe over a {
-                experience
-              } year period. I'm specialised in <Link
-                href="https://nodejs.org/en/">Node.js</Link
-              >, <Link href="https://react.dev/">React</Link> and <Link
-                href="https://rubyonrails.org/">Ruby on Rails</Link
-              >.
-            </p>
-            <p class="animate">
-              Currently I'm very interested in building static sites with <Link
-                href="https://astro.build/">Astro</Link
-              >, creating Shopify Apps and increasing my knowlede in rapid AI
-              development.
-            </p>
-          </div>
-        </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Latest posts
-            </h2>
-            <Link href="/blog"> See all posts </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+      <p class="hero-desc">{SITE_DESCRIPTION}</p>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Recent projects
-            </h2>
-            <Link href="/projects"> See all projects </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              projects.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
-                </li>
-              ))
-            }
-          </ul>
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      {
+        heroPosts.length > 0 && (
+          <nav class="hero-recent" aria-label="Selected posts">
+            <div class="hero-recent-list">
+              {
+                heroPosts.map((post) => {
+                  const heroDate = getHeroDateParts(post.data.pubDate);
+
+                  return (
+                    <a href={withBase(`/posts/${post.id}/`)} class="hero-recent-item">
+                      <span class="hero-recent-main">
+                        <span class="hero-recent-title">{post.data.title}</span>
+                        <span class="hero-recent-arrow" aria-hidden="true">
+                          ↗
+                        </span>
+                      </span>
+                      <span class="hero-recent-date">
+                        <time datetime={post.data.pubDate.toISOString()} aria-label={heroDate.label}>{
+                          heroDate.parts.map((part) => (
+                            <span class={`hero-recent-date-${part.type}`}>{part.value}</span>
+                          ))
+                        }</time>
+                      </span>
+                    </a>
+                  );
+                })
+              }
+            </div>
+          </nav>
+        )
+      }
+    </section>
+
+    {
+      featured && (
+        <section class="featured-section">
+          <a href={withBase(`/posts/${featured.id}/`)} class="featured-card">
+            <div class="featured-text">
+              <p class="featured-meta">
+                <FormattedDate date={featured.data.pubDate} />
+              </p>
+              <h2 class="featured-title">{featured.data.title}</h2>
+              {featured.data.description && (
+                <p class="featured-desc">{featured.data.description}</p>
+              )}
+              <span class="featured-cta">{tr.readLink}</span>
+            </div>
+            <div class="featured-thumb-wrap" style={featuredPlaceholderStyle}>
+              {featured.data.heroImage ? (
+                <Image
+                  src={featured.data.heroImage}
+                  alt={featured.data.title}
+                  class="featured-thumb"
+                  widths={[400, 720, 960, 1280]}
+                  sizes="(max-width: 600px) calc(100vw - 32px), 360px"
+                  quality={88}
+                  loading="lazy"
+                />
+              ) : (
+                <div class="featured-thumb card-img-placeholder" />
+              )}
+            </div>
+          </a>
         </section>
-      </div>
-    </aside>
-  </Container>
-</Layout>
+      )
+    }
+
+    {
+      gridPosts.length > 0 && (
+        <section class="posts-section">
+          <div class="posts-header">
+            <a href={withBase('/posts')} class="view-all">
+              {tr.viewAll}
+            </a>
+          </div>
+          <FeaturedPostGrid posts={gridPosts} />
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>

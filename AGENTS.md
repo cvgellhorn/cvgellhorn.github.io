@@ -2,11 +2,11 @@
 
 ## Cursor Cloud specific instructions
 
-This is a static Astro portfolio/blog site. No databases, backend services, or Docker containers are required.
+This is a static Astro portfolio/blog site using the [Astro Tone](https://github.com/hanityx/astro-tone) theme. No databases, backend services, or Docker containers are required.
 
 ### Node version
 
-The project uses **Node.js v24.14.1** (current Active LTS, specified in `.nvmrc`), which satisfies Astro 6's supported range. Use `nvm use` to activate it.
+The project uses **Node.js v24.21.0** (current Active LTS, specified in `.nvmrc`), which satisfies Astro 7's supported range. Use `nvm use` to activate it.
 
 ### Key commands
 
@@ -14,13 +14,14 @@ The project uses **Node.js v24.14.1** (current Active LTS, specified in `.nvmrc`
 |------|---------|
 | Install deps | `npm install` |
 | Dev server | `npm run dev` (serves on `http://localhost:4321`, binds to `--host`) |
-| Build | `npm run build` (static output in `dist/`) |
-| Lint / format | `npx prettier --check "src/**/*.{astro,js,ts,tsx,md,mdx,css}"` |
-
-There is no dedicated `lint` or `test` npm script; Prettier is the only code-quality tool configured.
+| Build | `npm run build` (static output in `dist/`, then Pagefind index) |
+| Type check | `npm run check` |
+| Lint | `npm run lint` and `npm run lint:css` |
+| Format | `npm run format` |
 
 ### Caveats
 
 - The dev server uses `astro dev --host`, which binds to `0.0.0.0:4321`.
-- Prettier reports pre-existing formatting issues in the repo (`src/content/projects/easyedit.md`, `src/env.d.ts`). These are not regressions.
-- Blog/project content lives in `src/content/` as Markdown/MDX files managed by Astro Content Collections.
+- Site-level settings live in `astro-theme-config.ts`.
+- Blog posts and projects live together in `src/content/posts/` as Markdown/MDX, with `category` (`Notes`, `Shopify`, `Projects`) and optional `demoURL` / `repoURL`.
+- Legacy `/blog` and `/projects` URLs redirect to `/posts`.
