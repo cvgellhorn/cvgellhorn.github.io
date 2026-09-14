@@ -8,8 +8,6 @@ demoURL: "https://tieout.ai"
 homeFeatured: true
 ---
 
-![Tieout](/images/blog/tieout-updated.webp)
-
 I'm excited to share my latest project, [Tieout](https://tieout.ai). A verification tool that compares AI-generated reports against original data sources to catch hallucinations, verify accuracy, and ensure complete data integrity.
 
 As AI-generated content becomes more common in business workflows, trusting the output is a real challenge. LLMs can fabricate statistics, misquote figures, or generate plausible sounding but incorrect data points. Tieout was built to solve exactly this problem.
