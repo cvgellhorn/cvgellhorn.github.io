@@ -3,6 +3,7 @@ title: "Save For Later - Shopify"
 description: "Save for later app for Shopify merchants."
 pubDate: "2024-08-30"
 category: "Projects"
+heroImage: "../../assets/save-for-later.webp"
 demoURL: "https://sturmfrei.com.au/apps/save-for-later"
 draft: true
 ---

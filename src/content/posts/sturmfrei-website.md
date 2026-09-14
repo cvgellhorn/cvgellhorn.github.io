@@ -3,7 +3,7 @@ title: "Sturmfrei Website"
 description: "Sturmfrei Pty Ltd Company Website"
 pubDate: "2024-07-04"
 category: "Projects"
-heroImage: "../../assets/sturmfrei.jpeg"
+heroImage: "../../assets/sturmfrei.webp"
 demoURL: "https://sturmfrei.com.au/"
 repoURL: "https://github.com/sturmfreico/sturmfreico.github.io"
 ---

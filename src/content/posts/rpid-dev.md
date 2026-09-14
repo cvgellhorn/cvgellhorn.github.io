@@ -3,7 +3,7 @@ title: "rpid.dev"
 description: "Personal Rapid Development Resources"
 pubDate: "2024-09-15"
 category: "Projects"
-heroImage: "../../assets/rpid-dev.jpeg"
+heroImage: "../../assets/rpid-dev.webp"
 demoURL: "https://rpid.dev/"
 homeHeroOrder: 1
 ---

@@ -3,6 +3,7 @@ title: "Website Refresh"
 description: "Introducing the new blog and project list"
 pubDate: "2024-08-30"
 category: "Notes"
+heroImage: "../../assets/website-refresh.webp"
 ---
 
 Hey everyone!

@@ -3,6 +3,7 @@ title: "Checkout UI Extension Card"
 description: "How to add a component with a white background to the Shopify Checkout UI"
 pubDate: "2024-11-25"
 category: "Shopify"
+heroImage: "../../assets/checkout-ui-card.webp"
 ---
 
 It seems like a simple task, but it took me a while to figure out how to add a component with a white background in the Shopify Checkout UI.
