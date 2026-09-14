@@ -7,7 +7,7 @@ heroImage: "../../assets/dynamic-app-url-extension.webp"
 homeHeroOrder: 2
 ---
 
-![Shopify Checkout UI Extension](/images/blog/dynamic-app-url-extension.webp)
+![Shopify Checkout UI Extension](/images/blog/dynamic-app-url-extension-updated.webp)
 
 When I began working on our custom Shopify app with a checkout UI extension, I encountered a recurring issue during development. Every time the development server restarted, the dynamically assigned Cloudflare tunnel URL provided by Shopify changed.
 

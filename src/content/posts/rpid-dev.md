@@ -8,7 +8,7 @@ demoURL: "https://rpid.dev/"
 homeHeroOrder: 1
 ---
 
-[![rpid.dev Website](/images/projects/rpid-screen.jpeg)](https://rpid.dev/)
+[![rpid.dev Website](/images/projects/rpid-screen-updated.jpeg)](https://rpid.dev/)
 
 I'm happy to announce that I launched [rpid.dev](https://rpid.dev/) today.
 This will be an ongoing project where I'll be adding resources and tools that I use for rapid development.

@@ -8,7 +8,7 @@ demoURL: "https://sturmfrei.com.au/"
 repoURL: "https://github.com/sturmfreico/sturmfreico.github.io"
 ---
 
-[![Sturmfrei Website](/images/projects/sturmfrei-compressed.jpeg)](https://sturmfrei.com.au/)
+[![Sturmfrei Website](/images/projects/sturmfrei-compressed-updated.jpeg)](https://sturmfrei.com.au/)
 
 We recently launched our company website [sturmfrei.com.au](https://sturmfrei.com.au/). The website was built using [Astro](https://astro.build/) and the [AstroWind](https://github.com/onwidget/astrowind) theme.
 

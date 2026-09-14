@@ -9,33 +9,50 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getUiText } from '../ui';
 import { withBase } from '../utils/paths';
 const tr = getUiText();
+const FEATURED_POST_COUNT = 3;
 
 const posts = (await getCollection('posts'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const featured = posts.find((post) => post.data.homeFeatured) ?? posts[0];
-const gridCandidates = posts.filter((post) => post.id !== featured?.id);
-const pinnedGridPosts = gridCandidates
+const featuredLead = posts.find((post) => post.data.homeFeatured) ?? posts[0];
+const remainingPosts = posts.filter((post) => post.id !== featuredLead?.id);
+const pinnedRemainingPosts = remainingPosts
   .filter((post) => post.data.homeOrder)
   .sort((a, b) => {
     const orderDelta = (a.data.homeOrder ?? 0) - (b.data.homeOrder ?? 0);
     if (orderDelta !== 0) return orderDelta;
     return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
   });
-const fallbackGridPosts = gridCandidates.filter((post) => !post.data.homeOrder);
-const gridPosts = [...pinnedGridPosts, ...fallbackGridPosts].slice(0, 3);
-const featuredPlaceholder = featured?.data.heroImage
-  ? await getImage({
-      src: featured.data.heroImage,
-      width: 48,
-      format: 'webp',
-      quality: 28,
-    })
-  : undefined;
-const featuredPlaceholderStyle = featuredPlaceholder
-  ? `--tone-image-placeholder: url("${featuredPlaceholder.src}");`
-  : undefined;
+const fallbackRemainingPosts = remainingPosts.filter((post) => !post.data.homeOrder);
+const orderedRemainingPosts = [...pinnedRemainingPosts, ...fallbackRemainingPosts];
+const featuredPosts = (featuredLead ? [featuredLead, ...orderedRemainingPosts] : []).slice(
+  0,
+  FEATURED_POST_COUNT
+);
+const featuredIds = new Set(featuredPosts.map((post) => post.id));
+const gridPosts = orderedRemainingPosts.filter((post) => !featuredIds.has(post.id)).slice(0, 3);
+const featuredPlaceholderEntries = await Promise.all(
+  featuredPosts.map(
+    async (post) =>
+      [
+        post.id,
+        post.data.heroImage
+          ? (
+              await getImage({
+                src: post.data.heroImage,
+                width: 48,
+                format: 'webp',
+                quality: 28,
+              })
+            ).src
+          : undefined,
+      ] as const
+  )
+);
+const featuredPlaceholderById = new Map<string, string | undefined>(featuredPlaceholderEntries);
+const featuredPlaceholderStyle = (src: string | undefined) =>
+  src ? `--tone-image-placeholder: url("${src}");` : undefined;
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -43,11 +60,9 @@ const featuredPlaceholderStyle = featuredPlaceholder
     <section class="hero">
       <h1 class="hero-title">
         <span class="hero-title-line">{tr.heroTitle}</span>
-        {
-          tr.heroTitleLine2 && (
-            <span class="hero-title-line hero-title-line--accent">{tr.heroTitleLine2}</span>
-          )
-        }
+        {tr.heroTitleLine2 && (
+          <span class="hero-title-line hero-title-line--accent">{tr.heroTitleLine2}</span>
+        )}
       </h1>
 
       <p class="hero-desc">{SITE_DESCRIPTION}</p>
@@ -68,28 +83,29 @@ const featuredPlaceholderStyle = featuredPlaceholder
       </nav>
     </section>
 
-    {
-      featured && (
-        <section class="featured-section">
-          <a href={withBase(`/posts/${featured.id}/`)} class="featured-card">
+    {featuredPosts.length > 0 && (
+      <section class="featured-section" aria-label="Featured posts">
+        {featuredPosts.map((post) => (
+          <a href={withBase(`/posts/${post.id}/`)} class="featured-card">
             <div class="featured-text">
               <p class="featured-meta">
-                <FormattedDate date={featured.data.pubDate} />
+                <FormattedDate date={post.data.pubDate} />
               </p>
-              <h2 class="featured-title">{featured.data.title}</h2>
-              {featured.data.description && (
-                <p class="featured-desc">{featured.data.description}</p>
-              )}
+              <h2 class="featured-title">{post.data.title}</h2>
+              {post.data.description && <p class="featured-desc">{post.data.description}</p>}
               <span class="featured-cta">{tr.readLink}</span>
             </div>
-            <div class="featured-thumb-wrap" style={featuredPlaceholderStyle}>
-              {featured.data.heroImage ? (
+            <div
+              class="featured-thumb-wrap"
+              style={featuredPlaceholderStyle(featuredPlaceholderById.get(post.id))}
+            >
+              {post.data.heroImage ? (
                 <Image
-                  src={featured.data.heroImage}
-                  alt={featured.data.title}
+                  src={post.data.heroImage}
+                  alt={post.data.title}
                   class="featured-thumb"
                   widths={[400, 720, 960, 1280]}
-                  sizes="(max-width: 600px) calc(100vw - 32px), 360px"
+                  sizes="(max-width: 600px) calc(100vw - 32px), 240px"
                   quality={88}
                   loading="lazy"
                 />
@@ -98,21 +114,19 @@ const featuredPlaceholderStyle = featuredPlaceholder
               )}
             </div>
           </a>
-        </section>
-      )
-    }
+        ))}
+      </section>
+    )}
 
-    {
-      gridPosts.length > 0 && (
-        <section class="posts-section">
-          <div class="posts-header">
-            <a href={withBase('/posts')} class="view-all">
-              {tr.viewAll}
-            </a>
-          </div>
-          <FeaturedPostGrid posts={gridPosts} />
-        </section>
-      )
-    }
+    {gridPosts.length > 0 && (
+      <section class="posts-section">
+        <div class="posts-header">
+          <a href={withBase('/posts')} class="view-all">
+            {tr.viewAll}
+          </a>
+        </div>
+        <FeaturedPostGrid posts={gridPosts} />
+      </section>
+    )}
   </main>
 </BaseLayout>
