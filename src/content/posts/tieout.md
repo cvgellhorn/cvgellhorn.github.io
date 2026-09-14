@@ -8,7 +8,7 @@ demoURL: "https://tieout.ai"
 homeFeatured: true
 ---
 
-![Tieout](/images/blog/tieout.webp)
+![Tieout](/images/blog/tieout-updated.webp)
 
 I'm excited to share my latest project, [Tieout](https://tieout.ai). A verification tool that compares AI-generated reports against original data sources to catch hallucinations, verify accuracy, and ensure complete data integrity.
 

@@ -7,7 +7,7 @@ heroImage: "../../assets/shiddy-biz.webp"
 demoURL: "https://shiddy.biz/"
 ---
 
-[![shiddy.biz Website](/images/projects/shiddy-biz-og.webp)](https://shiddy.biz/)
+[![shiddy.biz Website](/images/projects/shiddy-biz-og-updated.webp)](https://shiddy.biz/)
 
 After a lot of back and forth with wordpress and almost a year of no progress, I decided to move away from wordpress and build a simple website for our fun little side project.
 

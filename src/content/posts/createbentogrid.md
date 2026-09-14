@@ -8,7 +8,7 @@ demoURL: "https://createbentogrid.com/"
 homeOrder: 2
 ---
 
-[![createbentogrid.com Website](/images/projects/createbentogrid.webp)](https://createbentogrid.com/)
+[![createbentogrid.com Website](/images/projects/createbentogrid-updated.webp)](https://createbentogrid.com/)
 
 ## Crafting a Free Bento Grid Tool with AI Magic
 
