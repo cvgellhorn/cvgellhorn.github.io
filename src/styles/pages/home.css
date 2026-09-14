@@ -1,5 +1,6 @@
 .home-main {
   --date-meta-size: var(--text-footnote);
+  --featured-thumb-size: 15rem;
 
   max-width: var(--max-width-wide);
   margin: 0 auto;
@@ -14,7 +15,7 @@
 
 /* ── Hero ─────────────────────────────────── */
 .hero {
-  --hero-measure: calc(100% - 360px - var(--space-12));
+  --hero-measure: calc(100% - var(--featured-thumb-size) - var(--space-12));
   --hero-list-measure: min(100%, calc(var(--hero-measure) + var(--space-8)));
 
   padding: var(--space-20) 0 var(--space-12);
@@ -158,9 +159,9 @@
 
 .featured-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+  grid-template-columns: minmax(0, 1fr) var(--featured-thumb-size);
   gap: var(--space-12);
-  align-items: stretch;
+  align-items: start;
   text-decoration: none;
   color: inherit;
   transition:
@@ -223,7 +224,7 @@
 .featured-thumb-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 6 / 7;
+  aspect-ratio: 1;
   overflow: hidden;
   border-radius: var(--radius-xl);
   background:
@@ -233,7 +234,7 @@
       transparent 34%
     ),
     linear-gradient(135deg, var(--fill-secondary), var(--fill-tertiary));
-  align-self: stretch;
+  align-self: start;
   isolation: isolate;
 }
 
@@ -357,12 +358,11 @@
   }
 
   .featured-card {
-    grid-template-columns: minmax(0, 1fr) minmax(180px, 34%);
+    grid-template-columns: minmax(0, 1fr) minmax(9.5rem, var(--featured-thumb-size));
     gap: var(--space-6);
   }
 
   .featured-thumb-wrap {
-    aspect-ratio: 4 / 5;
     min-height: 0;
   }
 }
