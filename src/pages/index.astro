@@ -9,21 +9,31 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getUiText } from '../ui';
 import { withBase } from '../utils/paths';
 const tr = getUiText();
+const HERO_POST_COUNT = 3;
 
 const posts = (await getCollection('posts'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featured = posts.find((post) => post.data.homeFeatured) ?? posts[0];
-const gridCandidates = posts.filter((post) => post.id !== featured?.id);
-const pinnedGridPosts = gridCandidates
+const remainingPosts = posts.filter((post) => post.id !== featured?.id);
+const pinnedHeroPosts = remainingPosts
+  .filter((post) => post.data.homeHeroOrder)
+  .sort((a, b) => {
+    const orderDelta = (a.data.homeHeroOrder ?? 0) - (b.data.homeHeroOrder ?? 0);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+const fallbackHeroPosts = remainingPosts.filter((post) => !post.data.homeHeroOrder);
+const heroPosts = [...pinnedHeroPosts, ...fallbackHeroPosts].slice(0, HERO_POST_COUNT);
+const pinnedGridPosts = remainingPosts
   .filter((post) => post.data.homeOrder)
   .sort((a, b) => {
     const orderDelta = (a.data.homeOrder ?? 0) - (b.data.homeOrder ?? 0);
     if (orderDelta !== 0) return orderDelta;
     return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
   });
-const fallbackGridPosts = gridCandidates.filter((post) => !post.data.homeOrder);
+const fallbackGridPosts = remainingPosts.filter((post) => !post.data.homeOrder);
 const gridPosts = [...pinnedGridPosts, ...fallbackGridPosts].slice(0, 3);
 const featuredPlaceholder = featured?.data.heroImage
   ? await getImage({
@@ -54,18 +64,25 @@ const featuredPlaceholderStyle = featuredPlaceholder
 
       <div class="hero-divider" aria-hidden="true"></div>
 
-      <nav class="hero-recent" aria-label="All posts">
-        <div class="hero-recent-list">
-          <a href={withBase('/posts')} class="hero-recent-item">
-            <span class="hero-recent-main">
-              <span class="hero-recent-title">{tr.heroAllPosts}</span>
-              <span class="hero-recent-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </span>
-          </a>
-        </div>
-      </nav>
+      {heroPosts.length > 0 && (
+        <nav class="hero-recent" aria-label="Selected posts">
+          <div class="hero-recent-list">
+            {heroPosts.map((post) => (
+              <a href={withBase(`/posts/${post.id}/`)} class="hero-recent-item">
+                <span class="hero-recent-main">
+                  <span class="hero-recent-title">{post.data.title}</span>
+                  <span class="hero-recent-arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                </span>
+                <span class="hero-recent-date">
+                  <FormattedDate date={post.data.pubDate} />
+                </span>
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
     </section>
 
     {

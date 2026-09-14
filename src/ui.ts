@@ -8,7 +8,6 @@ const ui = {
   postsTitle: 'All Posts',
   heroTitle: 'Build, polish, ship.',
   heroTitleLine2: '',
-  heroAllPosts: 'All Posts',
   viewAll: 'All Posts →',
   readLink: 'Read →',
   postFeed: {
