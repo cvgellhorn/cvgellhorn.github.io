@@ -15,9 +15,11 @@ const navItems = config.nav;
   <nav class="nav-inner" aria-label={navAriaLabel}>
     <a href={withBase('/')} class="nav-logo">{headerTitle}</a>
     <div class="nav-right">
-      <div class="nav-links">
-        {navItems.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
-      </div>
+      {navItems.length > 0 && (
+        <div class="nav-links">
+          {navItems.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
+        </div>
+      )}
       <ThemeToggle />
     </div>
   </nav>

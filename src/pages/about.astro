@@ -49,8 +49,12 @@ const profileLinks = [
       <div class="about-intro">
         <h1 id="about-title" class="about-title">
           {headlineFirst}
-          <br />
-          {headlineSecond}
+          {headlineSecond && (
+            <>
+              <br />
+              {headlineSecond}
+            </>
+          )}
         </h1>
         <p class="about-lead">{profileLead}</p>
       </div>
