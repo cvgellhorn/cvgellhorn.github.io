@@ -1,22 +1,24 @@
-name: Deploy GitHub Pages
+name: Deploy Cloudflare Pages
 
 on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  deployments: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: cloudflare-pages-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    # Skip fork PRs: they cannot use this repo's Cloudflare secrets.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -24,23 +26,16 @@ jobs:
         with:
           node-version: 24.21.0
           cache: npm
-      - uses: actions/configure-pages@v6
       - name: Configure Astro site URL
         run: |
           echo "ASTRO_SITE_URL=https://cvgellhorn.com" >> "$GITHUB_ENV"
           echo "ASTRO_SITE_BASE=" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v5
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v5
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy dist --project-name=cvgellhorn --branch=${{ github.head_ref || github.ref_name }}
