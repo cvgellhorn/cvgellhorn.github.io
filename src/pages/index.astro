@@ -7,7 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getUiText } from '../ui';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 const tr = getUiText();
 const FEATURED_POST_COUNT = 3;
 
@@ -71,7 +71,7 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
 
       <nav class="hero-recent" aria-label="All posts">
         <div class="hero-recent-list">
-          <a href={withBase('/posts')} class="hero-recent-item">
+          <a href={withPage('/posts')} class="hero-recent-item">
             <span class="hero-recent-main">
               <span class="hero-recent-title">{tr.heroAllPosts}</span>
               <span class="hero-recent-arrow" aria-hidden="true">
@@ -85,8 +85,8 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
 
     {featuredPosts.length > 0 && (
       <section class="featured-section" aria-label="Featured posts">
-        {featuredPosts.map((post) => (
-          <a href={withBase(`/posts/${post.id}/`)} class="featured-card">
+        {featuredPosts.map((post, index) => (
+          <a href={withPage(`/posts/${post.id}`)} class="featured-card">
             <div class="featured-text">
               <p class="featured-meta">
                 <FormattedDate date={post.data.pubDate} />
@@ -107,7 +107,8 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
                   widths={[160, 400, 720, 960, 1280]}
                   sizes="(max-width: 600px) 84px, 240px"
                   quality={88}
-                  loading="lazy"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={index === 0 ? 'high' : 'auto'}
                 />
               ) : (
                 <div class="featured-thumb card-img-placeholder" />
@@ -121,7 +122,7 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
     {gridPosts.length > 0 && (
       <section class="posts-section">
         <div class="posts-header">
-          <a href={withBase('/posts')} class="view-all">
+          <a href={withPage('/posts')} class="view-all">
             {tr.viewAll}
           </a>
         </div>

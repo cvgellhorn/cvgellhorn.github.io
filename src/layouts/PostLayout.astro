@@ -9,9 +9,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import ImageLightbox from '../components/ImageLightbox.astro';
 import ScrollFocus from '../components/ScrollFocus.astro';
 import BaseLayout from './BaseLayout.astro';
-import { SITE_AUTHOR, SITE_LANG, SITE_TITLE } from '../consts';
+import { SITE_LANG, SITE_TITLE } from '../consts';
 import { getUiText } from '../ui';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
+import { buildPersonJsonLd } from '../utils/seo';
 import { serializeScriptJson } from '../utils/serialize-script-json';
 
 type Props = CollectionEntry<'posts'>['data'] & {
@@ -30,29 +31,70 @@ const {
   relatedPosts = [],
   demoURL,
   repoURL,
+  category,
 } = Astro.props;
 
 const tr = getUiText();
-const postsBase = withBase('/posts');
+const postsBase = withPage('/posts');
 const heroImageWidths = [640, 960, 1280, 1600];
 const heroImageSizes = '(max-width: 600px) calc(100vw - 32px), 784px';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteHref = new URL(withPage('/'), Astro.site).toString();
 const pubDateISO = pubDate.toISOString();
 const updatedDateISO = updatedDate?.toISOString();
+const heroImageUrl = heroImage ? new URL(heroImage.src, Astro.site).href : undefined;
+const personJsonLd = buildPersonJsonLd(siteHref);
 
 const jsonLd = serializeScriptJson({
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  description,
-  datePublished: pubDateISO,
-  ...(updatedDateISO && { dateModified: updatedDateISO }),
-  url: canonicalURL.href,
-  ...(heroImage && { image: new URL(heroImage.src, Astro.site).href }),
-  author: { '@type': 'Person', name: SITE_AUTHOR },
-  publisher: { '@type': 'Organization', name: SITE_TITLE },
-  inLanguage: SITE_LANG,
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      datePublished: pubDateISO,
+      dateModified: updatedDateISO ?? pubDateISO,
+      url: canonicalURL.href,
+      mainEntityOfPage: canonicalURL.href,
+      inLanguage: SITE_LANG,
+      ...(category && { articleSection: category }),
+      ...(heroImageUrl && {
+        image: {
+          '@type': 'ImageObject',
+          url: heroImageUrl,
+          width: heroImage?.width,
+          height: heroImage?.height,
+        },
+      }),
+      author: { '@id': `${siteHref}#person` },
+      publisher: { '@id': `${siteHref}#person` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: SITE_TITLE,
+          item: siteHref,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: tr.postsTitle,
+          item: new URL(postsBase, Astro.site).href,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: title,
+          item: canonicalURL.href,
+        },
+      ],
+    },
+    personJsonLd,
+  ],
 });
 ---
 
@@ -63,6 +105,7 @@ const jsonLd = serializeScriptJson({
   type="article"
   pubDate={pubDateISO}
   updatedDate={updatedDateISO}
+  section={category}
   bodyClass="post-page"
 >
   <Fragment slot="head">

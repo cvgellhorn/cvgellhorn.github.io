@@ -10,9 +10,11 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import config from './astro-theme-config.ts';
 import { toneExpressiveCodeOptions } from './src/config/expressive-code.ts';
+import { getLastmodByPathname } from './src/utils/sitemap-lastmod.ts';
 
 // https://astro.build/config
-const sitemapExcludedPaths = new Set(['/search/']);
+const sitemapExcludedPaths = new Set(['/search/', '/404.html', '/404/']);
+const sitemapLastmodByPath = getLastmodByPathname();
 const configuredSite = process.env.ASTRO_SITE_URL || config.site.url;
 const configuredBaseValue = process.env.ASTRO_SITE_BASE ?? config.site.base;
 const configuredBase = configuredBaseValue === '/' ? '' : configuredBaseValue.replace(/\/$/, '');
@@ -28,10 +30,11 @@ function withoutConfiguredBase(pathname) {
 export default defineConfig({
   site: configuredSite,
   base: configuredBase || undefined,
+  trailingSlash: 'always',
   redirects: {
-    '/blog': '/posts',
+    '/blog': '/posts/',
     '/blog/[...slug]': '/posts/[...slug]',
-    '/projects': '/posts',
+    '/projects': '/posts/',
     '/projects/[...slug]': '/posts/[...slug]',
   },
   integrations: [
@@ -39,6 +42,16 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: (page) => !sitemapExcludedPaths.has(withoutConfiguredBase(new URL(page).pathname)),
+      serialize(item) {
+        const pathname = withoutConfiguredBase(new URL(item.url).pathname);
+        const lastmod =
+          sitemapLastmodByPath.get(pathname) ??
+          sitemapLastmodByPath.get(pathname.endsWith('/') ? pathname : `${pathname}/`);
+        if (lastmod) {
+          item.lastmod = lastmod.toISOString();
+        }
+        return item;
+      },
     }),
   ],
   build: {

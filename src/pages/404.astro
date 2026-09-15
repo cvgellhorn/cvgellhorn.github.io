@@ -1,7 +1,7 @@
 ---
 import '../styles/pages/not-found.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { withBase } from '../utils/paths';
+import { withBase, withPage } from '../utils/paths';
 ---
 
 <BaseLayout
@@ -17,8 +17,12 @@ import { withBase } from '../utils/paths';
       <h1 class="not-found-title">Page not found</h1>
       <p class="not-found-desc">The URL may be wrong, or the page may have been removed.</p>
       <div class="not-found-actions">
-        <a href={withBase('/')} class="btn btn-primary">Home</a>
-        <a href={withBase('/posts')} class="btn btn-secondary">All posts</a>
+        <a href={withPage('/')} class="btn btn-primary">
+          Home
+        </a>
+        <a href={withPage('/posts')} class="btn btn-secondary">
+          All posts
+        </a>
       </div>
     </div>
   </main>

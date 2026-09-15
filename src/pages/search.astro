@@ -1,16 +1,22 @@
 ---
 import '../styles/pages/search.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 ---
 
-<BaseLayout title="Search" description="Search posts" robots="noindex, follow">
+<BaseLayout
+  title="Search"
+  description="Search notes, Shopify posts, and projects."
+  robots="noindex, follow"
+>
   <main id="main-content" class="search-main">
     <div class="search-header">
       <h1 class="search-title">Search</h1>
     </div>
     <div id="search" class="search-ui" aria-busy="true">
-      <p class="search-loading" role="status">Loading search...</p>
+      <p class="search-loading" role="status">
+        Loading search...
+      </p>
       <noscript>
         <style>
           .search-loading {
@@ -18,7 +24,8 @@ import { withBase } from '../utils/paths';
           }
         </style>
         <p class="search-fallback">
-          Search needs JavaScript. Browse the <a href={withBase('/posts/')}>posts archive</a> instead.
+          Search needs JavaScript. Browse the <a href={withPage('/posts')}>posts archive</a>{' '}
+          instead.
         </p>
       </noscript>
     </div>

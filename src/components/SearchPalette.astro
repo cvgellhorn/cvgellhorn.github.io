@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 import { serializeScriptJson } from '../utils/serialize-script-json';
 
 const posts = (await getCollection('posts'))
@@ -11,7 +11,7 @@ const items = posts.map((post) => ({
   title: post.data.title,
   description: post.data.description,
   category: post.data.category ?? 'Post',
-  href: withBase(`/posts/${post.id}/`),
+  href: withPage(`/posts/${post.id}`),
 }));
 ---
 
