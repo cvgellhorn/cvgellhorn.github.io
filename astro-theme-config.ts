@@ -21,6 +21,8 @@ const config = {
     dateLocale: 'en-US',
     title: 'cvgellhorn',
     logoLabel: 'cvgellhorn',
+    /** Document / Open Graph title for the homepage. Inner pages append ` — {title}`. */
+    homepageTitle: 'Christoph von Gellhorn — Software Engineer in Sydney',
     description:
       'Christoph von Gellhorn — Software Engineer in Sydney. Notes on Astro, Shopify, and building with AI.',
     author: 'Christoph von Gellhorn',
@@ -39,6 +41,8 @@ const config = {
 
   content: {
     categoryOrder: ['Projects', 'Shopify', 'Notes'],
+    postsDescription:
+      'Notes, Shopify work, and projects from Christoph von Gellhorn — writing on Astro, checkout extensions, and AI-assisted shipping.',
   },
 
   behavior: {

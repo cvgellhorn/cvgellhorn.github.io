@@ -2,7 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 
 type PostEntry = CollectionEntry<'posts'>;
 
@@ -41,7 +41,7 @@ const imagePlaceholderStyle = (src: string | undefined) =>
   {
     posts.map((post, index) => (
       <a
-        href={withBase(`${basePath}/${postSlug(post.id)}/`)}
+        href={withPage(`${basePath}/${postSlug(post.id)}`)}
         class:list={['featured-post-card', `featured-post-card--slot-${index + 1}`]}
       >
         <div
