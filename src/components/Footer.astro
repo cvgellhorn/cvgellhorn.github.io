@@ -1,6 +1,6 @@
 ---
 import config from '../../astro-theme-config';
-import { withBase } from '../utils/paths';
+import { withBase, withPage } from '../utils/paths';
 
 const today = new Date();
 const footerTitle = config.site.logoLabel || config.site.title;
@@ -18,7 +18,7 @@ const footerLinks = config.footerNav.filter((item) => item.href !== '/');
         <nav class="footer-links" aria-label="Footer navigation">
           {footerLinks.map((item) => (
             <a
-              href={withBase(item.href)}
+              href={item.href === '/rss.xml' ? withBase(item.href) : withPage(item.href)}
               data-search-palette-trigger={item.href === '/search' ? 'true' : undefined}
             >
               {item.label}

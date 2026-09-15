@@ -10,6 +10,18 @@ export function withBase(path: string) {
   return normalizedPath ? `${normalizedBase}${normalizedPath}` : normalizedBase;
 }
 
+/** Site page URLs with a trailing slash, matching `trailingSlash: 'always'`. */
+export function withPage(path: string) {
+  if (!path || externalPattern.test(path) || path.startsWith('#')) return path;
+
+  const [pathnameAndQuery, hash = ''] = path.split('#');
+  const [pathname = '', query = ''] = pathnameAndQuery.split('?');
+  const isFile = /\.[a-z0-9]+$/i.test(pathname);
+  const slashedPath = !isFile && pathname && !pathname.endsWith('/') ? `${pathname}/` : pathname;
+  const prefixed = withBase(slashedPath || '/');
+  return `${prefixed}${query ? `?${query}` : ''}${hash ? `#${hash}` : ''}`;
+}
+
 export function withoutBase(path: string) {
   const base = import.meta.env.BASE_URL || '/';
   if (base === '/') return path;

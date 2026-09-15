@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import config from '../../astro-theme-config';
 import { getUiText } from '../ui';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 import FormattedDate from './FormattedDate.astro';
 
 type PostEntry = CollectionEntry<'posts'>;
@@ -156,7 +156,7 @@ const Heading = headingLevel;
           data-search={`${post.data.title} ${post.data.description} ${post.data.category ?? ''}`.toLocaleLowerCase()}
           data-index={index}
         >
-          <a href={withBase(`${basePath}/${postSlug(post.id)}/`)} class="feed-link">
+          <a href={withPage(`${basePath}/${postSlug(post.id)}`)} class="feed-link">
             <FormattedDate class="feed-date" date={post.data.pubDate} />
             <div class="feed-body">
               <Heading class="feed-title">{post.data.title}</Heading>

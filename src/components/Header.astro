@@ -2,7 +2,7 @@
 import config from '../../astro-theme-config';
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { withBase } from '../utils/paths';
+import { withPage } from '../utils/paths';
 
 const skipLinkLabel = 'Skip to content';
 const navAriaLabel = 'Primary navigation';
@@ -13,7 +13,7 @@ const navItems = config.nav;
 <a href="#main-content" class="skip-link" tabindex="0">{skipLinkLabel}</a>
 <header class="site-header glass">
   <nav class="nav-inner" aria-label={navAriaLabel}>
-    <a href={withBase('/')} class="nav-logo">{headerTitle}</a>
+    <a href={withPage('/')} class="nav-logo">{headerTitle}</a>
     <div class="nav-right">
       {navItems.length > 0 && (
         <div class="nav-links">

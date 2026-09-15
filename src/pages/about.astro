@@ -2,6 +2,9 @@
 import '../styles/pages/about.css';
 import config from '../../astro-theme-config';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withPage } from '../utils/paths';
+import { buildPersonJsonLd } from '../utils/seo';
+import { serializeScriptJson } from '../utils/serialize-script-json';
 
 const profileImageUrl = config.about.profileImage.trim();
 const hasProfileImage = profileImageUrl.length > 0;
@@ -41,9 +44,26 @@ const profileLinks = [
     href: config.social.email ? `mailto:${config.social.email}` : '',
   },
 ].filter((link) => link.href);
+
+const siteHref = new URL(withPage('/'), Astro.site).toString();
+const pageHref = new URL(withPage('/about'), Astro.site).toString();
+const profileJsonLd = serializeScriptJson({
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: `About ${profileName}`,
+  description: profileLead,
+  url: pageHref,
+  mainEntity: buildPersonJsonLd(
+    siteHref,
+    hasProfileImage ? { image: new URL(profileImageUrl, Astro.site).href } : undefined
+  ),
+});
 ---
 
 <BaseLayout title="About" description={profileLead}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={profileJsonLd}></script>
+  </Fragment>
   <main id="main-content" class="about-main">
     <section class="about-hero" aria-labelledby="about-title">
       <div class="about-intro">
@@ -96,7 +116,7 @@ const profileLinks = [
                   <a
                     href={link.href}
                     target={link.href.startsWith('mailto:') ? undefined : '_blank'}
-                    rel={link.href.startsWith('mailto:') ? undefined : 'noopener'}
+                    rel={link.href.startsWith('mailto:') ? undefined : 'me noopener'}
                   >
                     {link.label}
                   </a>

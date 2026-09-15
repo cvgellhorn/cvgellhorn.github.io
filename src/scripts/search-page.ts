@@ -53,6 +53,17 @@ async function loadPagefindUi() {
   });
 }
 
+function applyQueryFromUrl(root: HTMLElement) {
+  const query = new URLSearchParams(window.location.search).get('q')?.trim();
+  if (!query) return;
+
+  const input = root.querySelector<HTMLInputElement>('input[type="search"], input[type="text"]');
+  if (!input) return;
+
+  input.value = query;
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
 async function initSearchPage() {
   const el = document.getElementById('search');
   if (!el || el.dataset.pagefindReady === 'true') return;
@@ -69,6 +80,7 @@ async function initSearchPage() {
         zero_results: 'No results for [QUERY]',
       },
     });
+    applyQueryFromUrl(el);
     el.setAttribute('aria-busy', 'false');
   } catch {
     el.setAttribute('aria-busy', 'false');

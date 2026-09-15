@@ -3,17 +3,32 @@ import '../../styles/pages/posts-index.css';
 import { getCollection } from 'astro:content';
 import PostFeed from '../../components/PostFeed.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION } from '../../consts';
+import { POSTS_DESCRIPTION } from '../../consts';
 import { getUiText } from '../../ui';
+import { withPage } from '../../utils/paths';
+import { serializeScriptJson } from '../../utils/serialize-script-json';
 
 const tr = getUiText();
 
 const posts = (await getCollection('posts'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const pageHref = new URL(withPage('/posts'), Astro.site).toString();
+const collectionJsonLd = serializeScriptJson({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: tr.postsTitle,
+  description: POSTS_DESCRIPTION,
+  url: pageHref,
+  isPartOf: { '@id': `${new URL(withPage('/'), Astro.site).toString()}#website` },
+});
 ---
 
-<BaseLayout title={tr.postsTitle} description={SITE_DESCRIPTION}>
+<BaseLayout title={tr.postsTitle} description={POSTS_DESCRIPTION}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={collectionJsonLd}></script>
+  </Fragment>
   <main id="main-content" class="posts-main">
     <div class="posts-header">
       <div>
