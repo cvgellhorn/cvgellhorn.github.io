@@ -22,9 +22,9 @@ const config = {
     title: 'cvgellhorn',
     logoLabel: 'cvgellhorn',
     /** Document / Open Graph title for the homepage. Inner pages append ` — {title}`. */
-    homepageTitle: 'Christoph von Gellhorn — Software Engineer in Sydney',
+    homepageTitle: 'Christoph von Gellhorn — Creating startups in Sydney',
     description:
-      'Christoph von Gellhorn — Software Engineer in Sydney. Notes on Astro, Shopify, and building with AI.',
+      "Hey, I'm @cvgellhorn and I build software in Sydney. Here you can find notes about my journey creating startups.",
     author: 'Christoph von Gellhorn',
     /** Optional absolute or root-relative image URL for homepage/search/about social previews. */
     defaultOgImage: '/og.png',
