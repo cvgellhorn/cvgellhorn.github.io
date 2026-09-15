@@ -1,5 +1,5 @@
 import config from '../../astro-theme-config';
-import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_HOMEPAGE_TITLE } from '../consts';
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_HOMEPAGE_TITLE, SITE_TITLE } from '../consts';
 
 export function getSameAsUrls() {
   const { github, linkedin, x } = config.social;
