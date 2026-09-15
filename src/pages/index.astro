@@ -41,9 +41,10 @@ const featuredPlaceholderEntries = await Promise.all(
           ? (
               await getImage({
                 src: post.data.heroImage,
-                width: 48,
+                width: 88,
+                height: 88,
                 format: 'webp',
-                quality: 28,
+                quality: 32,
               })
             ).src
           : undefined,
@@ -87,14 +88,6 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
       <section class="featured-section" aria-label="Featured posts">
         {featuredPosts.map((post) => (
           <a href={withBase(`/posts/${post.id}/`)} class="featured-card">
-            <div class="featured-text">
-              <p class="featured-meta">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-              <h2 class="featured-title">{post.data.title}</h2>
-              {post.data.description && <p class="featured-desc">{post.data.description}</p>}
-              <span class="featured-cta">{tr.readLink}</span>
-            </div>
             <div
               class="featured-thumb-wrap"
               style={featuredPlaceholderStyle(featuredPlaceholderById.get(post.id))}
@@ -102,16 +95,24 @@ const featuredPlaceholderStyle = (src: string | undefined) =>
               {post.data.heroImage ? (
                 <Image
                   src={post.data.heroImage}
-                  alt={post.data.title}
+                  alt=""
                   class="featured-thumb"
-                  widths={[400, 720, 960, 1280]}
-                  sizes="(max-width: 600px) calc(100vw - 32px), 240px"
-                  quality={88}
+                  width={176}
+                  height={176}
+                  quality={80}
                   loading="lazy"
                 />
               ) : (
                 <div class="featured-thumb card-img-placeholder" />
               )}
+            </div>
+            <div class="featured-text">
+              <p class="featured-meta">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+              <h2 class="featured-title">{post.data.title}</h2>
+              {post.data.description && <p class="featured-desc">{post.data.description}</p>}
+              <span class="featured-cta">{tr.readLink}</span>
             </div>
           </a>
         ))}
