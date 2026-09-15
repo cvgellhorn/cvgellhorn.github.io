@@ -1,5 +1,5 @@
 ---
-title: "Introducing Tieout"
+title: "Tieout (retired)"
 description: "A new tool to verify AI-generated reports against original data sources"
 pubDate: "2026-02-23"
 category: "Projects"

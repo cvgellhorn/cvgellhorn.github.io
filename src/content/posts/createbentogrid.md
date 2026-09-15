@@ -1,5 +1,5 @@
 ---
-title: "Bento Grids like Apple"
+title: "Bento Grids (retired)"
 description: "Create your own custom bento grid"
 pubDate: "2025-02-24"
 category: "Projects"
