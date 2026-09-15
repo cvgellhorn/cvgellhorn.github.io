@@ -24,7 +24,7 @@ const config = {
     /** Document / Open Graph title for the homepage. Inner pages append ` — {title}`. */
     homepageTitle: 'Christoph von Gellhorn — Creating startups in Sydney',
     description:
-      "Hey, I'm @cvgellhorn and I build software in Sydney. Here you can find notes about my journey creating startups.",
+      "Hey, I'm @cvgellhorn and I build software in Sydney. Read about my journey creating startups.",
     author: 'Christoph von Gellhorn',
     /** Optional absolute or root-relative image URL for homepage/search/about social previews. */
     defaultOgImage: '/og.png',
