@@ -370,7 +370,7 @@
 
 @media (max-width: 600px) {
   .home-main {
-    --featured-thumb-size: 4.5rem;
+    --featured-thumb-size: 5.25rem;
 
     padding: 0 var(--space-4) var(--space-16);
   }
@@ -392,16 +392,30 @@
 
   .featured-card {
     grid-template-columns: minmax(0, 1fr) var(--featured-thumb-size);
-    gap: var(--space-4);
+    gap: var(--space-3) var(--space-4);
+    align-items: start;
   }
 
   .featured-text {
+    display: contents;
+  }
+
+  .featured-meta {
+    grid-column: 1 / -1;
+  }
+
+  .featured-title,
+  .featured-desc,
+  .featured-cta {
+    grid-column: 1;
     min-width: 0;
-    min-height: 0;
   }
 
   .featured-thumb-wrap {
     display: block;
+    grid-column: 2;
+    grid-row: 2 / -1;
+    align-self: start;
     border-radius: var(--radius-md);
   }
 
