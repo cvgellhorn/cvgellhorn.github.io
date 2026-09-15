@@ -37,10 +37,7 @@
 [data-sf-effect='scroll-dark'] .post-header,
 [data-sf-effect='scroll-dark'] .post-title,
 [data-sf-effect='scroll-dark'] .post-description,
-[data-sf-effect='scroll-dark'] .post-divider,
-[data-sf-effect='scroll-dark'] .back-link,
-[data-sf-effect='scroll-dark'] .post-meta,
-[data-sf-effect='scroll-dark'] .post-accent {
+[data-sf-effect='scroll-dark'] .post-meta {
   transition:
     background-color var(--scroll-focus-theme-transition),
     color var(--scroll-focus-theme-transition),

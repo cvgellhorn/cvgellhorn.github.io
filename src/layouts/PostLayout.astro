@@ -73,12 +73,7 @@ const jsonLd = serializeScriptJson({
 
   <main id="main-content" class="post-main">
     <article data-pagefind-body>
-      <a href={postsBase} class="back-link">
-        {tr.backLink}
-      </a>
-
       <header class="post-header">
-        <div class="post-accent"></div>
         <div class="post-meta">
           <FormattedDate class="meta-date" date={pubDate} />
           {readingTime && (
@@ -116,8 +111,6 @@ const jsonLd = serializeScriptJson({
           </p>
         )}
       </header>
-
-      <div class="post-divider"></div>
 
       {heroImage && (
         <figure class="post-hero">
