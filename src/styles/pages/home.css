@@ -370,6 +370,8 @@
 
 @media (max-width: 600px) {
   .home-main {
+    --featured-thumb-size: 5.25rem;
+
     padding: 0 var(--space-4) var(--space-16);
   }
 
@@ -389,15 +391,20 @@
   }
 
   .featured-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) var(--featured-thumb-size);
+    gap: var(--space-4);
+    align-items: start;
   }
 
   .featured-text {
+    min-width: 0;
     min-height: 0;
   }
 
   .featured-thumb-wrap {
-    display: none;
+    display: block;
+    margin-top: calc(var(--date-meta-size) * 1.5 + var(--space-4));
+    border-radius: var(--radius-md);
   }
 
   .hero-divider {
@@ -414,6 +421,7 @@
 
   .featured-title {
     font-size: 1.5rem;
+    max-width: none;
   }
 }
 
