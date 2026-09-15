@@ -5,7 +5,7 @@ const ui = {
   allPosts: 'All Posts →',
   postsEyebrow: 'Archive',
   postsTitle: 'All Posts',
-  heroTitle: 'Moving fast, building stuff',
+  heroTitle: 'Building stuff',
   heroTitleLine2: '',
   heroAllPosts: 'All Posts',
   viewAll: 'All Posts →',
