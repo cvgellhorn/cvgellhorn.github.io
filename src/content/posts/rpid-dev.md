@@ -1,5 +1,5 @@
 ---
-title: "rpid.dev"
+title: "rpid.dev (retired)"
 description: "Personal Rapid Development Resources"
 pubDate: "2024-09-15"
 category: "Projects"
