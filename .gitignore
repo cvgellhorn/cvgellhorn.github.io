@@ -24,6 +24,9 @@ playwright-report/
 .env.*
 !.env.example
 
+# wrangler / Cloudflare Pages local state
+.wrangler/
+
 # editor and OS files
 .DS_Store
 .idea/
