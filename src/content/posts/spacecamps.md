@@ -5,6 +5,7 @@ pubDate: "2026-11-05"
 category: "Projects"
 heroImage: "../../assets/spacecamps.webp"
 demoURL: "https://spacecamps.com.au"
+homeFeatured: true
 ---
 
 [Spacecamps](https://spacecamps.com.au) is live. It's booking software for independent caravan and holiday parks in Australia and New Zealand. Guests pick a site, pay by card through Stripe and check in online, and the park pays a flat monthly fee from A$59. Spacecamps takes no commission on stays. A 15% OTA cut on a $300 weekend is $45, and small parks pay that on every booking.
